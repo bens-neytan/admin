@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css" />
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+
+<body>
+    <h1>Registration Form</h1>
+    <p>Please fill out this form with the required information!</p>
+    <form id="registration-form">
+        <fieldset>
+            <label for="first-name">Enter Your First Name: <input id="first-name" name="first-name" type="text" placeholder="First Name" required /></label>
+            <label for="last-name">Enter Your Last Name: <input id="last-name" name="last-name" type="text" placeholder="Last Name" required /></label>
+            <label for="email">Enter Your Email: <input id="email" name="email" type="email" placeholder="name@email.com" required /></label>
+            <label for="new-password">Create a New Password: <input id="new-password" name="new-password" type="password" placeholder="8-20 characters (letter with number)" pattern="[a-zA-Z0-5]{8,20}" required /></label>
+        </fieldset>
+<p></p>
+        <fieldset>
+            <legend>Account Type (required)</legend>
+            <label for="personal-account"><input id="personal-account" type="radio" name="account-type" class="inline" checked /> Personal Account</label>
+            <label for="business-account"><input id="business-account" type="radio" name="account-type" class="inline" /> Business Account</label>
+        </fieldset>
+        <fieldset>
+            <label for="profile-picture">Upload a Profile Picture: <input id="profile-picture" type="file" name="file" /></label>
+            <p></p>
+            <label for="age">Input your age (years): <input id="age" type="number" name="age" placeholder="must be 18 and above" min="18" max="60" /></label>
+            <label for="referrer">
+                <p></p>
+                In what platform did you hear about us? <select id="referrer" name="referrer">
+                    <option value="">(select one)</option>
+                    <option value="1">Facebook</option>
+                    <option value="2">YouTube</option>
+                    <option value="3">TikTok</option>
+                    <option value="4">Instagram</option>
+                    <option value="5">Other Platforms</option>
+                </select>
+            </label>
+            <p></p>
+            <label for="bio">Provide a bio:
+                <textarea id="bio" name="bio" rows="3" cols="30" placeholder="What's on your mind?"></textarea>
+            </label>
+        </fieldset>
+        <label for="terms-and-conditions">
+            <p></p>
+            <input class="inline" id="terms-and-conditions" type="checkbox" required name="terms-and-conditions" /> I accept the <a href="https://www.freecodecamp.org/news/terms-of-service/">terms and conditions</a>
+        </label>
+        <p></p>
+        <input type="submit" value="Submit" />
+    </form>
+
+<script>
+  emailjs.init("user_YVX3NDE_KIHfNBZ1a");
+  
+  document.getElementById('registration-form').addEventListener('Submit', function(event) {
+    event.preventDefault();
+    
+	console.log('Registration Form Submitted!');
+
+    const formData = new formData(this);
+    
+    emailjs.sendForm('service_bntc24', 'template_bntc24', formData)
+      .then(function(response) {
+        alert('Message sent successfully!');
+      }, function(error) {
+        alert('Failed to send message: ' + error);
+      });
+  });
+</script>
+</body>
+
+</html>
